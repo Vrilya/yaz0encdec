@@ -57,6 +57,6 @@ This produces `yaz0encdec`.
       dma.c/.h        DMA table parsing, validation, and writing
       romdb.c/.h      ROM version database and detection
       compress.c/.h   Full-ROM compression pipeline
-      decompress.c/.h Full-ROM decompression with automatic dmadata detection
+      decompress.c/.h Full-ROM decompression
       util.c/.h       Shared helpers (byte I/O, alignment, dynamic buffers)
     Makefile
