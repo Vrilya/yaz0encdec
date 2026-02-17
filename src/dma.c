@@ -4,7 +4,7 @@
 dma_entry_t entries[MAX_DMA_ENTRIES];
 int          num_entries = 0;
 
-void parse_dma_table(const uint8_t *rom_data, uint32_t offset, int count, int matching) {
+void parse_dma_table(const uint8_t *rom_data, uint32_t offset, int count) {
     if (count > MAX_DMA_ENTRIES) die("too many DMA entries");
     num_entries = count;
 
@@ -25,11 +25,9 @@ void parse_dma_table(const uint8_t *rom_data, uint32_t offset, int count, int ma
 
         if (e->pstart == DMA_DELETED && e->pend == DMA_DELETED) {
             e->deleted = 1;
-            if (!matching) {
-                e->start = e->end = 0;
-                e->ostart = e->oend = 0;
-                e->pstart = e->pend = 0;
-            }
+            e->start = e->end = 0;
+            e->ostart = e->oend = 0;
+            e->pstart = e->pend = 0;
         } else if (e->pend != 0 && e->pend != DMA_DELETED) {
             fprintf(stderr, "error: DMA entry %d (%08X %08X %08X %08X) "
                     "suggests the ROM is already compressed\n",

@@ -14,7 +14,7 @@ static int cmp_by_ostart(const void *a, const void *b) {
 
 uint8_t *compress_rom(const uint8_t *rom_data, int mb,
                       uint32_t dma_offset, int dma_count,
-                      int matching, size_t *out_size) {
+                      size_t *out_size) {
     for (int i = 0; i < num_entries; i++) {
         if (entries[i].deleted) {
             entries[i].start = entries[i].ostart;
@@ -44,7 +44,7 @@ uint8_t *compress_rom(const uint8_t *rom_data, int mb,
         size_t comp_sz;
         uint8_t *comp = yaz0_encode(file_data, file_size, &comp_sz);
 
-        if (!matching && comp_sz >= file_size) {
+        if (comp_sz >= file_size) {
             free(comp);
             e->comp_data = (uint8_t *)malloc(file_size);
             if (!e->comp_data) die("out of memory");
@@ -92,9 +92,6 @@ uint8_t *compress_rom(const uint8_t *rom_data, int mb,
 
     uint8_t *out_rom = (uint8_t *)calloc(compsz, 1);
     if (!out_rom) die("out of memory");
-    if (matching)
-        for (size_t j = 0; j < compsz; j++)
-            out_rom[j] = (uint8_t)(j & 0xFF);
 
     int inject_total = 0;
     for (int i = 0; i < num_entries; i++)
@@ -108,9 +105,6 @@ uint8_t *compress_rom(const uint8_t *rom_data, int mb,
         fprintf(stderr, "\rinjecting file %d/%d: ", inject_count, inject_total);
         fflush(stderr);
         memcpy(out_rom + e->pstart, e->comp_data, e->comp_sz);
-        if (matching)
-            memset(out_rom + e->pstart + e->comp_sz, 0,
-                   align16(e->comp_sz) - e->comp_sz);
         free(e->comp_data);
         e->comp_data = NULL;
     }

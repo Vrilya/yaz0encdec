@@ -26,9 +26,8 @@ extern int          num_entries;
  * Parse DMA table from ROM data.
  *   offset   - byte offset of the DMA table in the ROM
  *   count    - number of entries
- *   matching - if nonzero, preserve deleted entry addresses as-is
  */
-void parse_dma_table(const uint8_t *rom_data, uint32_t offset, int count, int matching);
+void parse_dma_table(const uint8_t *rom_data, uint32_t offset, int count);
 
 /* Validate DMA table entries for consistency */
 void validate_dma(size_t rom_size);

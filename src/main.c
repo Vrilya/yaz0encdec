@@ -125,7 +125,7 @@ static int do_batch(const char *in_dir, const char *out_dir) {
         memset(entries, 0, sizeof(entries));
         num_entries = 0;
 
-        parse_dma_table(rom_data, dma_offset, dma_count, 0);
+        parse_dma_table(rom_data, dma_offset, dma_count);
         validate_dma((size_t)rom_len);
         apply_rom_config(detected);
 
@@ -136,7 +136,7 @@ static int do_batch(const char *in_dir, const char *out_dir) {
 
         size_t out_rom_size;
         uint8_t *out_rom = compress_rom(rom_data, MB_DEFAULT, dma_offset, dma_count,
-                                         0, &out_rom_size);
+                                         &out_rom_size);
         free(rom_data);
 
         /* Build output path */
@@ -199,6 +199,9 @@ int main(int argc, char **argv) {
         return do_batch(in_path, out_path);
     }
 
+    if (!do_compress && !do_decompress)
+        die("must specify --compress or --decompress");
+
     if (!in_path)  die("no --in arg provided");
     if (!out_path) die("no --out arg provided");
     if (strcmp(in_path, out_path) == 0)
@@ -256,7 +259,7 @@ int main(int argc, char **argv) {
         int dma_count = detected->dma_count;
 
         fprintf(stderr, "DMA table: 0x%X, %d entries\n", dma_offset, dma_count);
-        parse_dma_table(rom_data, dma_offset, dma_count, 0);
+        parse_dma_table(rom_data, dma_offset, dma_count);
         validate_dma((size_t)rom_len);
 
         apply_rom_config(detected);
@@ -268,7 +271,7 @@ int main(int argc, char **argv) {
 
         size_t out_rom_size;
         uint8_t *out_rom = compress_rom(rom_data, MB_DEFAULT, dma_offset, dma_count,
-                                         0, &out_rom_size);
+                                         &out_rom_size);
         free(rom_data);
         fprintf(stderr, "ROM compressed successfully!\n");
 
