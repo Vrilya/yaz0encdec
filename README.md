@@ -54,7 +54,7 @@ This produces `yaz0encdec`.
       main.c          Entry point and argument parsing
       yaz0.c/.h       Yaz0 encoder and decoder
       n64crc.c/.h     N64 ROM CRC calculation
-      dma.c/.h        DMA table parsing, validation, and writing
+      dma.c/.h        DMA table parsing, validation and writing
       romdb.c/.h      ROM version database and detection
       compress.c/.h   Full-ROM compression pipeline
       decompress.c/.h Full-ROM decompression pipeline
