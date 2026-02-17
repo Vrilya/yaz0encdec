@@ -25,7 +25,6 @@ typedef struct {
 } buf_t;
 
 void buf_init(buf_t *b, size_t initial_cap);
-void buf_ensure(buf_t *b, size_t extra);
 void buf_push8(buf_t *b, uint8_t v);
 void buf_free(buf_t *b);
 

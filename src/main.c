@@ -209,15 +209,12 @@ int main(int argc, char **argv) {
 
     /* Load ROM */
     fprintf(stderr, "loading '%s'...\n", in_path);
-    FILE *f = fopen(in_path, "rb");
-    if (!f) { fprintf(stderr, "error: cannot open '%s'\n", in_path); exit(1); }
-    fseek(f, 0, SEEK_END);
-    long rom_len = ftell(f);
-    fseek(f, 0, SEEK_SET);
-    uint8_t *rom_data = (uint8_t *)malloc(rom_len);
-    if (!rom_data) die("out of memory");
-    if (fread(rom_data, 1, rom_len, f) != (size_t)rom_len) die("failed to read ROM");
-    fclose(f);
+    long rom_len = 0;
+    uint8_t *rom_data = load_file(in_path, &rom_len);
+    if (!rom_data) {
+        fprintf(stderr, "error: cannot open '%s'\n", in_path);
+        exit(1);
+    }
     fprintf(stderr, "ROM size: %ld bytes (%.1f MiB)\n", rom_len, (double)rom_len/(1024*1024));
 
     if (do_decompress) {
@@ -231,10 +228,11 @@ int main(int argc, char **argv) {
         fprintf(stderr, "decompressed ROM size: %zu bytes (%.1f MiB)\n",
                 out_rom_size, (double)out_rom_size/(1024*1024));
 
-        f = fopen(out_path, "wb");
-        if (!f) { fprintf(stderr, "error: cannot open '%s'\n", out_path); exit(1); }
-        fwrite(out_rom, 1, out_rom_size, f);
-        fclose(f);
+        if (!write_file(out_path, out_rom, out_rom_size)) {
+            fprintf(stderr, "error: cannot write '%s'\n", out_path);
+            free(out_rom);
+            exit(1);
+        }
         free(out_rom);
         fprintf(stderr, "decompressed ROM written to '%s'\n", out_path);
     } else {
@@ -275,10 +273,11 @@ int main(int argc, char **argv) {
         free(rom_data);
         fprintf(stderr, "ROM compressed successfully!\n");
 
-        f = fopen(out_path, "wb");
-        if (!f) { fprintf(stderr, "error: cannot open '%s'\n", out_path); exit(1); }
-        fwrite(out_rom, 1, out_rom_size, f);
-        fclose(f);
+        if (!write_file(out_path, out_rom, out_rom_size)) {
+            fprintf(stderr, "error: cannot write '%s'\n", out_path);
+            free(out_rom);
+            exit(1);
+        }
         free(out_rom);
         fprintf(stderr, "compressed ROM written to '%s'\n", out_path);
     }

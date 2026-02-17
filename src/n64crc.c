@@ -13,8 +13,10 @@
 #define CHECKSUM_CIC6106 0x1FEA617Au
 
 static uint32_t crc_table[256];
+static int crc_table_ready = 0;
 
 static void n64_gen_table(void) {
+    if (crc_table_ready) return;
     uint32_t poly = 0xEDB88320u;
     for (int i = 0; i < 256; i++) {
         uint32_t crc = (uint32_t)i;
@@ -24,6 +26,7 @@ static void n64_gen_table(void) {
         }
         crc_table[i] = crc;
     }
+    crc_table_ready = 1;
 }
 
 static uint32_t n64_crc32(const uint8_t *data, size_t offset, size_t length) {

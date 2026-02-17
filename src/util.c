@@ -38,7 +38,7 @@ void buf_init(buf_t *b, size_t initial_cap) {
     b->cap = initial_cap;
 }
 
-void buf_ensure(buf_t *b, size_t extra) {
+static void buf_ensure(buf_t *b, size_t extra) {
     if (b->len + extra > b->cap) {
         while (b->len + extra > b->cap)
             b->cap *= 2;
