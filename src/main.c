@@ -16,14 +16,16 @@ static void usage(void) {
         "Usage:\n"
         "    yaz0encdec --compress --in <rom.z64> --out <compressed.z64>\n"
         "    yaz0encdec --decompress --in <compressed.z64> --out <decompressed.z64>\n"
-        "    yaz0encdec --batch --in <source_dir> --out <target_dir>\n"
+        "    yaz0encdec --batchc --in <source_dir> --out <target_dir>\n"
+        "    yaz0encdec --batchd --in <source_dir> --out <target_dir>\n"
         "\n"
         "Options:\n"
-        "    --in <file>       Input ROM file (or source directory for --batch)\n"
-        "    --out <file>      Output ROM file (or target directory for --batch)\n"
+        "    --in <file>       Input ROM file (or source directory for batch modes)\n"
+        "    --out <file>      Output ROM file (or target directory for batch modes)\n"
         "    --compress, -c    Compress a decompressed ROM\n"
         "    --decompress, -d  Decompress a compressed ROM\n"
-        "    --batch           Compress all recognized ROMs from --in dir to --out dir\n"
+        "    --batchc          Compress all recognized ROMs from --in dir to --out dir\n"
+        "    --batchd          Decompress all recognized ROMs from --in dir to --out dir\n"
         "\n"
     );
     exit(1);
@@ -65,9 +67,85 @@ static int has_z64_ext(const char *name) {
     return strcmp(name + len - 4, ".z64") == 0;
 }
 
+static int do_batch_decompress(const char *in_dir, const char *out_dir) {
+    if (!in_dir)  die("--batchd requires --in <source directory>");
+    if (!out_dir) die("--batchd requires --out <target directory>");
+    if (strcmp(in_dir, out_dir) == 0)
+        die("--in and --out cannot be the same directory");
+
+    DIR *dir = opendir(in_dir);
+    if (!dir) {
+        fprintf(stderr, "error: cannot open directory '%s'\n", in_dir);
+        return 1;
+    }
+
+    ensure_dir(out_dir);
+
+    int total = 0, success = 0, skipped = 0;
+
+    struct dirent *ent;
+    while ((ent = readdir(dir)) != NULL) {
+        if (!has_z64_ext(ent->d_name))
+            continue;
+
+        total++;
+
+        char in_path[1024];
+        snprintf(in_path, sizeof(in_path), "%s/%s", in_dir, ent->d_name);
+
+        fprintf(stderr, "\n=== [%d] %s ===\n", total, ent->d_name);
+        fprintf(stderr, "loading '%s'...\n", in_path);
+
+        long rom_len = 0;
+        uint8_t *rom_data = load_file(in_path, &rom_len);
+        if (!rom_data) {
+            fprintf(stderr, "error: cannot read '%s', skipping\n", in_path);
+            skipped++;
+            continue;
+        }
+        fprintf(stderr, "ROM size: %ld bytes (%.1f MiB)\n",
+                rom_len, (double)rom_len / (1024 * 1024));
+
+        size_t out_rom_size;
+        uint8_t *out_rom = do_decompress_rom(rom_data, (size_t)rom_len, &out_rom_size);
+        free(rom_data);
+
+        if (!out_rom) {
+            fprintf(stderr, "error: decompression failed for '%s', skipping\n", ent->d_name);
+            skipped++;
+            continue;
+        }
+
+        fprintf(stderr, "decompressed ROM size: %zu bytes (%.1f MiB)\n",
+                out_rom_size, (double)out_rom_size / (1024 * 1024));
+
+        char out_path[1024];
+        snprintf(out_path, sizeof(out_path), "%s/%s", out_dir, ent->d_name);
+
+        if (!write_file(out_path, out_rom, out_rom_size)) {
+            fprintf(stderr, "error: cannot write '%s'\n", out_path);
+            free(out_rom);
+            skipped++;
+            continue;
+        }
+
+        free(out_rom);
+        fprintf(stderr, "decompressed ROM written to '%s'\n", out_path);
+        success++;
+    }
+
+    closedir(dir);
+
+    fprintf(stderr, "\n=== batch decompress complete ===\n");
+    fprintf(stderr, "total: %d, decompressed: %d, skipped: %d\n",
+            total, success, skipped);
+
+    return (success > 0) ? 0 : 1;
+}
+
 static int do_batch(const char *in_dir, const char *out_dir) {
-    if (!in_dir)  die("--batch requires --in <source directory>");
-    if (!out_dir) die("--batch requires --out <target directory>");
+    if (!in_dir)  die("--batchc requires --in <source directory>");
+    if (!out_dir) die("--batchc requires --out <target directory>");
     if (strcmp(in_dir, out_dir) == 0)
         die("--in and --out cannot be the same directory");
 
@@ -173,6 +251,7 @@ int main(int argc, char **argv) {
     int do_compress = 0;
     int do_decompress = 0;
     int batch_mode = 0;
+    int batchd_mode = 0;
 
     for (int i = 1; i < argc; i++) {
         const char *arg = argv[i];
@@ -186,8 +265,10 @@ int main(int argc, char **argv) {
             do_compress = 1;
         } else if (strcmp(arg, "--decompress") == 0 || strcmp(arg, "-d") == 0) {
             do_decompress = 1;
-        } else if (strcmp(arg, "--batch") == 0) {
+        } else if (strcmp(arg, "--batchc") == 0) {
             batch_mode = 1;
+        } else if (strcmp(arg, "--batchd") == 0) {
+            batchd_mode = 1;
         } else {
             fprintf(stderr, "error: unknown argument '%s'\n", arg); exit(1);
         }
@@ -198,6 +279,10 @@ int main(int argc, char **argv) {
 
     if (batch_mode) {
         return do_batch(in_path, out_path);
+    }
+
+    if (batchd_mode) {
+        return do_batch_decompress(in_path, out_path);
     }
 
     if (!do_compress && !do_decompress)
