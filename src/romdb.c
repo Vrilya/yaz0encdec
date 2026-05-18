@@ -118,20 +118,20 @@ static const int skip_ique[] = {
 /* --- Version database --- */
 
 const rom_version_t rom_versions[] = {
-    { "NTSC 1.0",          "98-10-21 04:56:31", 0x740C, 0x7430, 1526, skip_ntsc10, CODEC_YAZ0, 0,  0 },
-    { "NTSC 1.1",          "98-10-26 10:58:45", 0x740C, 0x7430, 1526, skip_ntsc11, CODEC_YAZ0, 0,  0 },
-    { "NTSC 1.2",          "98-11-12 18:17:03", 0x793C, 0x7960, 1526, skip_ntsc12, CODEC_YAZ0, 0,  0 },
-    { "PAL 1.0",           "98-11-10 14:34:22", 0x792C, 0x7950, 1527, skip_pal10,  CODEC_YAZ0, 0,  0 },
-    { "PAL 1.1",           "98-11-18 17:36:49", 0x794C, 0x7970, 1527, skip_pal11,  CODEC_YAZ0, 0,  0 },
-    { "NTSC Master Quest", "02-12-19 14:05:42", 0x7150, 0x7170, 1525, skip_ntscmq, CODEC_YAZ0, 0,  0 },
-    { "NTSC GameCube",     "02-12-19 13:28:09", 0x71D0, 0x71F0, 1525, skip_ntscgc, CODEC_YAZ0, 0,  0 },
-    { "PAL Master Quest",  "03-02-21 20:37:19", 0x71D0, 0x71F0, 1526, skip_palmq,  CODEC_YAZ0, 0,  0 },
-    { "PAL GameCube",      "03-02-21 20:12:23", 0x71D0, 0x71F0, 1526, skip_palgc,  CODEC_YAZ0, 0,  0 },
+    { "NTSC 1.0",          "26-05-18 10:00:04", 0x740C, 0x7430, 1526, skip_ntsc10, CODEC_YAZ0, 0,  0 },
+    { "NTSC 1.1",          "26-05-18 10:00:05", 0x740C, 0x7430, 1526, skip_ntsc11, CODEC_YAZ0, 0,  0 },
+    { "NTSC 1.2",          "26-05-18 10:00:06", 0x793C, 0x7960, 1526, skip_ntsc12, CODEC_YAZ0, 0,  0 },
+    { "PAL 1.0",           "26-05-18 10:00:09", 0x792C, 0x7950, 1527, skip_pal10,  CODEC_YAZ0, 0,  0 },
+    { "PAL 1.1",           "26-05-18 10:00:10", 0x794C, 0x7970, 1527, skip_pal11,  CODEC_YAZ0, 0,  0 },
+    { "NTSC Master Quest", "26-05-18 10:00:08", 0x7150, 0x7170, 1525, skip_ntscmq, CODEC_YAZ0, 0,  0 },
+    { "NTSC GameCube",     "26-05-18 10:00:07", 0x71D0, 0x71F0, 1525, skip_ntscgc, CODEC_YAZ0, 0,  0 },
+    { "PAL Master Quest",  "26-05-18 10:00:12", 0x71D0, 0x71F0, 1526, skip_palmq,  CODEC_YAZ0, 0,  0 },
+    { "PAL GameCube",      "26-05-18 10:00:11", 0x71D0, 0x71F0, 1526, skip_palgc,  CODEC_YAZ0, 0,  0 },
     { "PAL OTR",           "98-11-10 11:11:11", 0x792C, 0x7950, 1527, skip_otr,    CODEC_YAZ0, 0,  0 },
-    { "NTSC iQue",         "03-10-22 16:23:19", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
-    { "PAL iQue",          "03-10-22 16:23:29", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
-    { "NTSC MQ iQue",      "03-10-22 16:23:39", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
-    { "PAL MQ iQue",       "03-10-22 16:23:49", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
+    { "NTSC iQue",         "26-05-18 10:00:02", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
+    { "PAL iQue",          "26-05-18 10:00:03", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
+    { "NTSC MQ iQue",      "26-05-18 10:00:00", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
+    { "PAL MQ iQue",       "26-05-18 10:00:01", 0xB75C, 0xB780, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
     { "Normal iQue",       "03-10-22 16:23:19", 0xB77C, 0xB7A0, 1525, skip_ique,   CODEC_ZLIB, 1, 29 },
 };
 
