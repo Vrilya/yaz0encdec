@@ -57,7 +57,7 @@ Short forms are also available:
 Batch-compress every recognized `.z64` file in a directory:
 
 ```sh
-./yaz0encdec --batch --in source_dir --out target_dir
+./yaz0encdec --batchc --in source_dir --out target_dir
 ```
 
 Batch mode skips unrecognized ROMs and writes recognized ROMs to the target
