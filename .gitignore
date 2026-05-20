@@ -1,5 +1,6 @@
 build/
 *.o
+*.z64
 yaz0encdec
 yaz0encdec.exe
-roms/
+
