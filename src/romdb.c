@@ -87,10 +87,10 @@ const rom_version_t rom_versions[] = {
     { "SWE PAL Master Quest",     "26-05-18 10:00:12", 0x71D0, 0x71F0, 1526, skip_palgc,        CODEC_YAZ0, 0,  0 },
     { "SWE PAL GameCube",         "26-05-18 10:00:11", 0x71D0, 0x71F0, 1526, skip_palgc,        CODEC_YAZ0, 0,  0 },
     { "SWE PAL OTR",              "98-11-10 11:11:11", 0x792C, 0x7950, 1527, skip_pal10_swe,    CODEC_YAZ0, 0,  0 },
-    { "SWE NTSC iQue",            "26-05-18 10:00:02", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  9 },
-    { "SWE PAL iQue",             "26-05-18 10:00:03", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
-    { "SWE NTSC MQ iQue",         "26-05-18 10:00:00", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
-    { "SWE PAL MQ iQue",          "26-05-18 10:00:01", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
+    { "SWE NTSC iQue",            "26-05-18 10:00:02", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
+    { "SWE PAL iQue",             "26-05-18 10:00:03", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
+    { "SWE NTSC MQ iQue",         "26-05-18 10:00:00", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
+    { "SWE PAL MQ iQue",          "26-05-18 10:00:01", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
     { "Normal iQue",              "03-10-22 16:23:19", 0xB77C, 0xB7A0, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
 };
 
