@@ -23,6 +23,10 @@ size_t align16(size_t size) {
     return (size + 15) & ~(size_t)15;
 }
 
+size_t align1k(size_t size) {
+    return (size + 1023) & ~(size_t)1023;
+}
+
 size_t align8mb(size_t size) {
     size_t a = 8 * 0x100000;
     return ((size + a - 1) / a) * a;

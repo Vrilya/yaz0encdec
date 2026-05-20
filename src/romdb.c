@@ -91,7 +91,7 @@ const rom_version_t rom_versions[] = {
     { "SWE PAL iQue",             "26-05-18 10:00:03", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
     { "SWE NTSC MQ iQue",         "26-05-18 10:00:00", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
     { "SWE PAL MQ iQue",          "26-05-18 10:00:01", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
-    { "Normal iQue",              "03-10-22 16:23:19", 0xB77C, 0xB7A0, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
+    { "Normal iQue",              "03-10-22 16:23:19", 0xB77C, 0xB7A0, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
 };
 
 const size_t num_rom_versions = sizeof(rom_versions) / sizeof(rom_versions[0]);

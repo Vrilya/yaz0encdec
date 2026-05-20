@@ -15,6 +15,7 @@ void     put32(uint8_t *data, size_t offset, uint32_t value);
 
 /* Alignment helpers */
 size_t align16(size_t size);
+size_t align1k(size_t size);
 size_t align8mb(size_t size);
 
 /* Dynamic byte buffer */

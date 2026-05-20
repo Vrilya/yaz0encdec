@@ -51,8 +51,7 @@ uint8_t *compress_rom(const uint8_t *rom_data, int mb,
         else
             comp = yaz0_encode(file_data, file_size, &comp_sz);
 
-        if (!comp || (ver->codec != CODEC_ZLIB && comp_sz >= file_size)) {
-            free(comp);
+        if (!comp) {
             e->comp_data = (uint8_t *)malloc(file_size);
             if (!e->comp_data) die("out of memory");
             memcpy(e->comp_data, file_data, file_size);
@@ -87,7 +86,7 @@ uint8_t *compress_rom(const uint8_t *rom_data, int mb,
 
     size_t compsz;
     if (mb == 0)
-        compsz = align8mb(comp_total);
+        compsz = (ver->codec == CODEC_ZLIB) ? align1k(comp_total) : align8mb(comp_total);
     else {
         compsz = (size_t)mb * 0x100000;
         if (comp_total > compsz) {
@@ -120,6 +119,11 @@ uint8_t *compress_rom(const uint8_t *rom_data, int mb,
     if (total_decompressed > 0)
         fprintf(stderr, "compression ratio: %.2f%%\n",
                 (double)total_compressed / (double)total_decompressed * 100.0);
+
+    if (ver->codec == CODEC_YAZ0) {
+        for (size_t i = comp_total; i < compsz; i++)
+            out_rom[i] = (uint8_t)(i & 0xFF);
+    }
 
     write_dma_table(out_rom, dma_offset, dma_count);
     n64crc(out_rom);

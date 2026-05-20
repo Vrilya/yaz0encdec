@@ -212,7 +212,7 @@ static int do_batch(const char *in_dir, const char *out_dir) {
             if (entries[i].compress) comp_count++;
         fprintf(stderr, "files to compress: %d\n", comp_count);
 
-        int mb = detected->mb ? detected->mb : MB_DEFAULT;
+        int mb = detected->mb;
         size_t out_rom_size;
         uint8_t *out_rom = compress_rom(rom_data, mb, dma_offset, dma_count,
                                          detected, &out_rom_size);
@@ -353,7 +353,7 @@ int main(int argc, char **argv) {
             if (entries[i].compress) comp_count++;
         fprintf(stderr, "files to compress: %d\n", comp_count);
 
-        int mb = detected->mb ? detected->mb : MB_DEFAULT;
+        int mb = detected->mb;
         size_t out_rom_size;
         uint8_t *out_rom = compress_rom(rom_data, mb, dma_offset, dma_count,
                                          detected, &out_rom_size);
