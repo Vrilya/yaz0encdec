@@ -1,0 +1,5 @@
+build/
+*.o
+yaz0encdec
+yaz0encdec.exe
+roms/
