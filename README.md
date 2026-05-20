@@ -14,8 +14,7 @@ and N64 CRC calculation are all implemented in this source tree.
 
 The tool was created as a study of how OoT ROMs are structured, how the DMA
 file table maps virtual addresses to physical segments, and how those segments
-are compressed. It is primarily used for producing ROMs compatible with my
-Swedish translation of Ocarina of Time.
+are compressed.
 
 ## Supported ROMs
 
@@ -25,10 +24,8 @@ Swedish translation of Ocarina of Time.
 - PAL GameCube
 - NTSC Master Quest
 - PAL Master Quest
-- NTSC iQue
-- PAL iQue
-- NTSC iQue Master Quest
-- PAL iQue Master Quest
+- iQue
+- All Swedish ROMs
 
 Unknown ROMs are rejected instead of guessed. The version table lives in
 `src/romdb.c`.
