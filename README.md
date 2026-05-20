@@ -57,6 +57,12 @@ Batch-compress every recognized `.z64` file in a directory:
 ./yaz0encdec --batchc --in source_dir --out target_dir
 ```
 
+Batch-decompress every recognized `.z64` file in a directory:
+
+```sh
+./yaz0encdec --batchd --in source_dir --out target_dir
+```
+
 Batch mode skips unrecognized ROMs and writes recognized ROMs to the target
 directory using the same filenames.
 
