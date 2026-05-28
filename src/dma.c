@@ -25,9 +25,6 @@ void parse_dma_table(const uint8_t *rom_data, uint32_t offset, int count) {
 
         if (e->pstart == DMA_DELETED && e->pend == DMA_DELETED) {
             e->deleted = 1;
-            e->start = e->end = 0;
-            e->ostart = e->oend = 0;
-            e->pstart = e->pend = 0;
         } else if (e->pend != 0 && e->pend != DMA_DELETED) {
             fprintf(stderr, "error: DMA entry %d (%08X %08X %08X %08X) "
                     "suggests the ROM is already compressed\n",
@@ -63,50 +60,13 @@ void validate_dma(size_t rom_size) {
     }
 }
 
-/* Sort comparators */
-
-static int cmp_by_size_desc(const void *a, const void *b) {
-    int ia = *(const int *)a, ib = *(const int *)b;
-    uint32_t sa = entries[ia].end - entries[ia].start;
-    uint32_t sb = entries[ib].end - entries[ib].start;
-    if (sa > sb) return -1;
-    if (sa < sb) return 1;
-    return 0;
-}
-
-static int cmp_by_start_asc(const void *a, const void *b) {
-    int ia = *(const int *)a, ib = *(const int *)b;
-    if (entries[ia].start < entries[ib].start) return -1;
-    if (entries[ia].start > entries[ib].start) return 1;
-    return 0;
-}
-
 void write_dma_table(uint8_t *out, uint32_t dma_offset, int dma_count) {
-    int sorted_idx[MAX_DMA_ENTRIES];
-    for (int i = 0; i < num_entries; i++) sorted_idx[i] = i;
-    qsort(sorted_idx, num_entries, sizeof(int), cmp_by_size_desc);
-
-    int num_used = 0;
-    for (int i = 0; i < num_entries; i++) {
-        if (entries[sorted_idx[i]].start == entries[sorted_idx[i]].end) break;
-        num_used++;
-    }
-    qsort(sorted_idx, num_used, sizeof(int), cmp_by_start_asc);
-
     memset(out + dma_offset, 0, (size_t)dma_count * 16);
 
-    size_t ofs = dma_offset;
-    for (int i = 0; i < num_used; i++) {
-        dma_entry_t *e = &entries[sorted_idx[i]];
+    for (int i = 0; i < num_entries; i++) {
+        size_t ofs = dma_offset + (size_t)i * 16;
+        dma_entry_t *e = &entries[i];
         put32(out, ofs, e->start); put32(out, ofs+4, e->end);
         put32(out, ofs+8, e->pstart); put32(out, ofs+12, e->pend);
-        ofs += 16;
-    }
-    for (int i = num_used; i < num_entries; i++) {
-        dma_entry_t *e = &entries[sorted_idx[i]];
-        put32(out, ofs, e->start); put32(out, ofs+4, e->end);
-        put32(out, ofs+8, e->pstart); put32(out, ofs+12, e->pend);
-        ofs += 16;
-        if (e->end == 0) break;
     }
 }

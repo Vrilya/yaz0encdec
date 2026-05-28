@@ -23,6 +23,8 @@ uint8_t *compress_rom(const uint8_t *rom_data, int mb,
             entries[i].start = entries[i].ostart;
             entries[i].end   = entries[i].oend;
             entries[i].compress = 0;
+            entries[i].pstart = DMA_DELETED;
+            entries[i].pend   = DMA_DELETED;
         }
     }
 
