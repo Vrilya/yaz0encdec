@@ -27,6 +27,7 @@ segments are compressed.
 - iQue
 - All Swedish ROMs
 - Majora's Mask NTSC-U
+- Majora's Mask NTSC-U GameCube
 - Majora's Mask PAL 1.0
 - Majora's Mask PAL 1.1
 - Majora's Mask PAL GameCube

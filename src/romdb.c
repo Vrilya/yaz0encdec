@@ -75,6 +75,16 @@ static const int skip_mm_ntscu[] = {
     1559,1560,1561,1562,1563,1564,1565,1566,1567, -1
 };
 
+static const int skip_mm_ntscgc[] = {
+    0,1,2,3,4,5,6,7,8,9,
+    15,16,17,18,19,20,21,22,
+    25,26,27,28,29,30,
+    651,1124,
+    1536,1537,1538,1539,1540,1541,1542,1543,1544,1545,
+    1546,1547,1548,1549,1550,1551,1552,1553,1554,1555,
+    1556,1557,1558,1559,1560,1561,1562,1563,1564, -1
+};
+
 static const int skip_mm_eu10[] = {
     0,1,2,3,4,5,6,7,8,
     17,18,19,20,21,22,23,24,25,26,
@@ -127,6 +137,7 @@ const rom_version_t rom_versions[] = {
     { "SWE PAL MQ iQue",          "26-05-18 10:00:01", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
     { "Normal iQue",              "03-10-22 16:23:19", 0xB77C, 0xB7A0, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
     { "Majora's Mask NTSC-U",     "00-07-31 17:04:16", 0x1A4DC, 0x1A500, 1568, skip_mm_ntscu,   CODEC_YAZ0, 0, 32 },
+    { "Majora's Mask NTSC-U GC",  "03-08-26 04:20:25", 0x1AE70, 0x1AE90, 1565, skip_mm_ntscgc,  CODEC_YAZ0, 0, 32 },
     { "Majora's Mask EU 1.0",     "00-09-25 11:16:53", 0x1A62C, 0x1A650, 1589, skip_mm_eu10,    CODEC_YAZ0, 0, 32 },
     { "Majora's Mask EU 1.1",     "00-09-29 09:29:41", 0x1A8AC, 0x1A8D0, 1589, skip_mm_eu10,    CODEC_YAZ0, 0, 32 },
     { "Majora's Mask EU GameCube", "03-10-04 00:40:20", 0x1AE70, 0x1AE90, 1587, skip_mm_eugc,    CODEC_YAZ0, 0, 32 },
