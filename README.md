@@ -29,6 +29,7 @@ segments are compressed.
 - Majora's Mask NTSC-U
 - Majora's Mask PAL 1.0
 - Majora's Mask PAL 1.1
+- Majora's Mask PAL GameCube
 
 Unknown ROMs are rejected instead of guessed. The version table lives in
 `src/romdb.c`.
