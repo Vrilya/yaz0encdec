@@ -1,4 +1,4 @@
-# yaz0encdec - N64 OoT ROM Yaz0 compressor/decompressor
+# yaz0encdec - Zelda 64 ROM Yaz0/raw-deflate compressor/decompressor
 # -------------------------------------------------------
 # Build targets:
 #   make            - cross-compile Windows .exe (mingw-w64)

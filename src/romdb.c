@@ -75,6 +75,18 @@ static const int skip_mm_ntscu[] = {
     1559,1560,1561,1562,1563,1564,1565,1566,1567, -1
 };
 
+static const int skip_mm_eu10[] = {
+    0,1,2,3,4,5,6,7,8,
+    17,18,19,20,21,22,23,24,25,26,
+    27,28,29,30,
+    33,34,35,36,37,38,39,40,
+    41,42,43,44,45,46,47,48,
+    669,1148,
+    1560,1561,1562,1563,1564,1565,1566,1567,1568,1569,
+    1570,1571,1572,1573,1574,1575,1576,1577,1578,1579,
+    1580,1581,1582,1583,1584,1585,1586,1587,1588, -1
+};
+
 /* --- Version database --- */
 
 const rom_version_t rom_versions[] = {
@@ -103,6 +115,7 @@ const rom_version_t rom_versions[] = {
     { "SWE PAL MQ iQue",          "26-05-18 10:00:01", 0xB75C, 0xB780, 1525, skip_ntscgc,       CODEC_ZLIB, 1, 29 },
     { "Normal iQue",              "03-10-22 16:23:19", 0xB77C, 0xB7A0, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
     { "Majora's Mask NTSC-U",     "00-07-31 17:04:16", 0x1A4DC, 0x1A500, 1568, skip_mm_ntscu,   CODEC_YAZ0, 0, 32 },
+    { "Majora's Mask EU 1.0",     "00-09-25 11:16:53", 0x1A62C, 0x1A650, 1589, skip_mm_eu10,    CODEC_YAZ0, 0, 32 },
 };
 
 const size_t num_rom_versions = sizeof(rom_versions) / sizeof(rom_versions[0]);

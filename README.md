@@ -1,7 +1,7 @@
 # yaz0encdec
 
 `yaz0encdec` is a small C99 command-line tool for compressing and
-decompressing Nintendo 64 Ocarina of Time ROMs.
+decompressing supported Nintendo 64 Zelda ROMs.
 
 It understands the ROM's DMA table, detects the ROM version from the embedded
 build date, and recompresses each file with the codec used by that ROM family:
@@ -12,9 +12,9 @@ build date, and recompresses each file with the codec used by that ROM family:
 The project is dependency-free. Yaz0, raw deflate encode/decode, DMA handling
 and N64 CRC calculation are all implemented in this source tree.
 
-The tool was created as a study of how OoT ROMs are structured, how the DMA
-file table maps virtual addresses to physical segments, and how those segments
-are compressed.
+The tool was created as a study of how Zelda 64 ROMs are structured, how the
+DMA file table maps virtual addresses to physical segments, and how those
+segments are compressed.
 
 ## Supported ROMs
 
@@ -26,6 +26,8 @@ are compressed.
 - PAL Master Quest
 - iQue
 - All Swedish ROMs
+- Majora's Mask NTSC-U
+- Majora's Mask PAL 1.0
 
 Unknown ROMs are rejected instead of guessed. The version table lives in
 `src/romdb.c`.
