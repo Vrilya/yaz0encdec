@@ -116,6 +116,7 @@ const rom_version_t rom_versions[] = {
     { "Normal iQue",              "03-10-22 16:23:19", 0xB77C, 0xB7A0, 1525, skip_ntscgc,       CODEC_ZLIB, 1,  0 },
     { "Majora's Mask NTSC-U",     "00-07-31 17:04:16", 0x1A4DC, 0x1A500, 1568, skip_mm_ntscu,   CODEC_YAZ0, 0, 32 },
     { "Majora's Mask EU 1.0",     "00-09-25 11:16:53", 0x1A62C, 0x1A650, 1589, skip_mm_eu10,    CODEC_YAZ0, 0, 32 },
+    { "Majora's Mask EU 1.1",     "00-09-29 09:29:41", 0x1A8AC, 0x1A8D0, 1589, skip_mm_eu10,    CODEC_YAZ0, 0, 32 },
 };
 
 const size_t num_rom_versions = sizeof(rom_versions) / sizeof(rom_versions[0]);

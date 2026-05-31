@@ -28,6 +28,7 @@ segments are compressed.
 - All Swedish ROMs
 - Majora's Mask NTSC-U
 - Majora's Mask PAL 1.0
+- Majora's Mask PAL 1.1
 
 Unknown ROMs are rejected instead of guessed. The version table lives in
 `src/romdb.c`.
